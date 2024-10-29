@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.workerpresence.controller.ManagerController" stylesheets="@styles.css" styleClass="manager-view">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="top-bar">
+            <Label fx:id="clockLabel" styleClass="clock-label" text="Current Time" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button fx:id="logoutButton" onAction="#handleLogout" styleClass="primary-button" text="Logout" />
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="managerTabPane" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Dashboard">
+                    <AnchorPane>
+                        <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" styleClass="container">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Label text="Worker ID:" styleClass="field-label" />
+                                <TextField fx:id="workerIdField" promptText="Enter Worker ID" />
+                                <Button fx:id="clockInButton" onAction="#handleClockIn" styleClass="action-button table-button" text="Clock In" />
+                                <Button fx:id="clockOutButton" onAction="#handleClockOut" styleClass="action-button table-button" text="Clock Out" />
+                            </HBox>
+                            <Label fx:id="managerStatusLabel" styleClass="status-label" text="Status messages will appear here." />
+                        </VBox>
+                    </AnchorPane>
+                </Tab>
+
+                <Tab text="Logs">
+                    <AnchorPane>
+                        <VBox alignment="TOP_CENTER" spacing="15" AnchorPane.topAnchor="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" styleClass="container">
+                            <children>
+                                <Label styleClass="login-title" text="All Worker Logs" />
+
+                                <HBox alignment="CENTER_LEFT" spacing="10">
+                                    <Label text="Filter by Worker ID:" styleClass="field-label" />
+                                    <TextField fx:id="filterWorkerIdField" promptText="Enter Worker ID" />
+
+                                    <Label text="From Date:" styleClass="field-label" />
+                                    <DatePicker fx:id="fromDatePicker" />
+                                    <Spinner fx:id="fromHourSpinner" prefWidth="60" />
+                                    <Spinner fx:id="fromMinuteSpinner" prefWidth="60" />
+
+                                    <Label text="To Date:" styleClass="field-label" />
+                                    <DatePicker fx:id="toDatePicker" />
+                                    <Spinner fx:id="toHourSpinner" prefWidth="60" />
+                                    <Spinner fx:id="toMinuteSpinner" prefWidth="60" />
+
+                                    <Button fx:id="applyFilterButton" onAction="#handleFilter" styleClass="primary-button" text="Apply Filter" />
+                                    <Button fx:id="clearFilterButton" onAction="#handleClearFilter" styleClass="secondary-button" text="Clear Filter" />
+                                </HBox>
+
+                                <TableView fx:id="logTableView" prefHeight="400" styleClass="table-view">
+                                    <columns>
+                                        <TableColumn fx:id="colLogId" text="Log ID" prefWidth="75" />
+                                        <TableColumn fx:id="colWorkerId" text="Worker ID" prefWidth="100" />
+                                        <TableColumn fx:id="colName" text="Name" prefWidth="150" />
+                                        <TableColumn fx:id="colLocation" text="Location" prefWidth="100" />
+                                        <TableColumn fx:id="colTimestamp" text="Timestamp" prefWidth="200" />
+                                        <TableColumn fx:id="colStatus" text="Status" prefWidth="100" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
+                    </AnchorPane>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
